@@ -1,0 +1,660 @@
+# Run this to update:
+# py update-shanepy
+
+# sudo python2 setup.py build -b /tmp/shanepy install --record /tmp/files.txt
+# sudo python3 setup.py build -b /tmp/shanepy install --record /tmp/files.txt
+
+from __future__ import print_function
+
+import os
+import sys
+import subprocess
+import pprint
+import json
+import json as jn
+
+# Use try because I might be importing shanepy into an environment which doesn't
+# have these packages
+try:
+    import pandas as pd
+except:
+    True
+
+try:
+    import numpy
+    import numpy as np
+except:
+    True
+
+import pickle
+
+try:
+    import scipy
+except:
+    True
+
+import xml
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+
+try:
+    import sqlparse
+except:
+    True
+
+try:
+    from StringIO import StringIO
+    from StringIO import StringIO as sio
+except ImportError:
+    from io import StringIO
+    from io import StringIO as sio
+
+
+def b(command, inputstring="", timeout=0):
+    """Runs a shell command"""
+    #print(command, file=sys.stderr)
+    p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
+    #p.stdin.write(bytearray(inputstring, 'utf-8'))
+    p.stdin.write(str(inputstring).encode('utf-8'))
+    p.stdin.close()
+    output = p.stdout.read().decode("utf-8")
+    p.wait()
+    # print(output)
+    #return [output.rstrip(), p.returncode]
+    # I don't want rstrip because my output might have trailing spaces, not just
+    # newlines
+    return [output, p.returncode]
+
+
+def bsh(command, inputstring="", timeout=0):
+    """Runs a shell command"""
+    #print(command, file=sys.stderr)
+    p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
+    #p.stdin.write(bytearray(inputstring, 'utf-8'))
+    p.stdin.write(str(inputstring).encode('utf-8'))
+    p.stdin.close()
+    output = p.stdout.read().decode("utf-8")
+    p.wait()
+    # print(output)
+    #return [output.rstrip(), p.returncode]
+    # I don't want rstrip because my output might have trailing spaces, not just
+    # newlines
+    return [output, p.returncode]
+
+
+def bash(command, inputstring="", timeout=0):
+    """Runs a shell command"""
+    #print(command, file=sys.stderr)
+    p = subprocess.Popen(command, shell=True, executable="/bin/bash", stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
+    #p.stdin.write(bytearray(inputstring, 'utf-8'))
+    p.stdin.write(str(inputstring).encode('utf-8'))
+    p.stdin.close()
+    output = p.stdout.read().decode("utf-8")
+    p.wait()
+    # print(output)
+    # I don't want rstrip because my output might have trailing spaces, not just
+    # newlines
+    return [output, p.returncode]
+
+
+def ipy():
+    """Splits the screen, and starts an ipython."""
+
+    bash("tm -d sph -c ~ -n ipython ipython &")[0]
+
+
+pp = pprint.PrettyPrinter(indent=2, width=1000, depth=20)
+
+
+def ppr(o):
+    if isinstance(o, xml.etree.ElementTree.ElementTree):
+        print(pprs(o))
+        return None
+
+    if isinstance(o, xml.etree.ElementTree.Element):
+        print(pprs(o))
+        return None
+
+    pp.pprint(o)
+
+
+def pprs(o):
+    if isinstance(o, xml.etree.ElementTree.ElementTree):
+        root = o.getroot()
+        rough_string = ET.tostring(root, 'utf-8')
+        reparsed = minidom.parseString(rough_string)
+        return reparsed.toprettyxml(indent="\t")
+
+    if isinstance(o, xml.etree.ElementTree.Element):
+        rough_string = ET.tostring(o, 'utf-8')
+        reparsed = minidom.parseString(rough_string)
+        return reparsed.toprettyxml(indent="\t")
+
+def pretty_sql(sql):
+    #  import bpython; bpython.embed(locals_=dict(globals(), **locals()))
+    return sqlparse.format(sql, reindent=True, keyword_case='upper')
+
+def k(o):
+    """
+    Pickle an object then put it into a vim.
+
+    :param o: The object to be opened in tmux
+    """
+
+    if o is None:
+        return None
+
+    try:
+        import tempfile
+        pickle_file = tempfile.NamedTemporaryFile('wb', suffix='.pickle', delete=False)
+
+        #return bash("tm -d nw 'vim -'", str(pickle.dumps(o)))
+        pickle.dump(o,pickle_file)
+        #return bash("tmux-temp-vim.sh -e pickle", str())
+
+        return bash("tm -d nw \"vim \\\"" + pickle_file.name + "\\\"\"")
+    except:
+        pass
+
+if (sys.version_info > (3, 0)):
+    # Even with higher versions, past might not be available
+    try:
+        from past.builtins import execfile
+    except:
+        True
+
+def source_file(fp):
+    """Directly includes python source code."""
+
+    sys.stdout = open(os.devnull, 'w')
+    execfile(fp)
+    sys.stdout = sys.__stdout__
+
+
+#  if (sys.version_info > (3, 0)):
+    #  import shanepy3
+    #  from shanepy3 import *
+    #  source_file("shanepy3.py")
+
+def read_csv_smart(*args, **kwargs):
+    try:
+        # How do I make this code run on python2?
+        # Default values must go before args and kwargs
+
+        #  return pd.read_csv(*args, **kwargs, dtype={'SysDefaultVal': object})
+        # It's not possible to ignore this python3 syntax when running under
+        # python2 unless I conditionally include the module.
+        # https://stackoverflow.com/questions/32482502/how-can-i-ignore-python-3-syntax-when-running-script-under-python-2
+        return pd.read_csv(dtype={'SysDefaultVal': np.float32}, *args, **kwargs)
+    except:
+        pass
+
+    try:
+        #return pd.read_csv(*args, **kwargs, encoding='latin1', dtype={'SysDefaultVal': object})
+        return pd.read_csv(dtype={'SysDefaultVal': np.float32}, encoding='latin1', *args, **kwargs)
+    except:
+        pass
+
+
+def my_to_csv(*args, **kwargs):
+    return pd.DataFrame.to_csv(na_rep="", *args, **kwargs)
+
+
+def d(o):
+    """
+    Describe an object
+    """
+
+    if isinstance(o, numpy.ndarray):
+        return scipy.stats.describe(o)
+
+    ppr(o)
+
+def i():
+    """Get stdin as a string"""
+    import sys
+    return sys.stdin.read()
+
+def T(list_of_lists):
+    """Transposes a list of lists"""
+
+    import six
+    return list(map(list, six.moves.zip_longest(*list_of_lists, fillvalue=' ')))
+
+def list_of_lists_to_text(arg):
+    """Saves a list of lists to a text file"""
+
+    return "\n".join([''.join(l) for l in arg])
+
+def s(o, fp):
+    """Save object repr to path"""
+
+    with open(fp, 'w') as f:
+        f.write(o)
+
+def p(o):
+    """Save object repr to stdout"""
+
+    # sys.stdout.write(o)
+    
+    print(o,end="")
+
+
+def tf(s):
+    """Creates a temporary file from a string and returns the path"""
+
+    import tempfile
+    f = tempfile.NamedTemporaryFile('w', suffix='.txt', delete=False)
+    f.seek(0)  # start from the beginning of the file
+    f.write(s)
+    return f.name
+
+#  if hasattr(type(o), 'readlines') and callable(getattr(type(o), 'readlines')):
+#  def strip_list(l):
+#  return l[:-1] if l[-1] == '\n' else l
+#  return [strip_list(list(line)) for line in o.readlines()]
+
+def l(fp):
+    return [line.rstrip('\n') for line in open(fp)]
+
+def o(fp):
+    """
+    Opens the file given by the path into a python object.
+
+    :param str fp: The path of the file
+    """
+
+    #  , dtype={'ID': object}
+
+    import re
+
+    if re.match(r'.*\.npy', fp) is not None:
+        import numpy as np
+        try:
+            ret = np.load(fp)
+            return ret
+        except:
+            pass
+
+        try:
+            ret = np.load(fp, encoding="latin1")
+            return ret
+        except:
+            pass
+
+        try:
+            ret = np.load(fp, encoding="bytes")
+            return ret
+        except:
+            pass
+
+    if re.match(r'.*\.xml', fp) is not None:
+        import pandas as pd
+        ret = read_csv_smart(fp)
+        #  sys.stdout.write(str(type(ret)))
+        return ret
+
+    if re.match(r'.*\.csv', fp) is not None:
+        import pandas as pd
+        ret = read_csv_smart(fp)
+        #  sys.stdout.write(str(type(ret)))
+        return ret
+
+    if re.match(r'.*\.xls', fp) is not None:
+        import pandas as pd
+        ret = pd.read_excel(fp)
+        #  sys.stdout.write(str(type(ret)))
+        return ret
+
+    if (re.match(r'.*\.pickle$', fp) is not None or re.match(r'.*\.p$', fp) is not None):
+        import pickle
+
+        with open(fp, 'rUb') as f:
+            data = f.read()
+
+        ret = pickle.loads(data)
+        return ret
+
+    #  import pandas as pd
+    with open(fp, 'rU') as f:
+        def strip_list(l):
+            return l[:-1] if l[-1] == '\n' else l
+
+        return [strip_list(list(line)) for line in f.readlines()]
+
+    #  ret = pd.DataFrame(matrix)
+
+def r(o):
+    """
+    Splits the terminal, and runs a program on the string representation of the object, depending on its type, such as visidata for a DataFrame.
+
+    :param o: The object to be opened in tmux
+    """
+
+    sys.stdout.write(str(type(o)))
+
+    # python 2 only
+    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
+        return bash("tnw 'fpvd'", o.decode("utf-8"))
+
+    #elif isinstance(o, pd.core.series.Series):
+    #    return bash("tnw 'fpvd'", pd.Series(o).to_csv(index=False))
+
+    if isinstance(o, pd.core.frame.DataFrame):
+        return bash("tnw fpvd", o.to_csv(index=False))
+    elif isinstance(o, set):
+        # For a set of tuples
+        # Say, created like this:
+        # diff = set(zip(df1.CDID, df1.ElementName)) - set(zip(df2.CDID, df2.ElementName))
+        return bash("tnw fpvd", pd.DataFrame(dict(o)).to_csv(index=False))
+    elif isinstance(o, tuple):
+        return bash("tnw fpvd", pd.DataFrame(list(o)).to_csv(index=False))
+    elif isinstance(o, numpy.ndarray):
+        return bash("tnw fpvd", pd.DataFrame(o).to_csv(index=False))
+    elif isinstance(o, set):
+        return bash("tnw fpvd", pd.DataFrame(o).to_csv(index=False))
+    elif isinstance(o, list):
+        return bash("tnw fpvd", pd.DataFrame(o).to_csv(index=False))
+    elif hasattr(type(o), 'to_csv') and callable(getattr(type(o), 'to_csv')):
+        return bash("tnw fpvd", o.to_csv(index=False))
+    elif isinstance(o, dict):
+        bash("dict")
+        return bash("tnw v", ppr(o))
+    elif isinstance(o, str):
+        return bash("tnw v", o)
+    elif isinstance(o, xml.etree.ElementTree.ElementTree) or isinstance(o, xml.etree.ElementTree.Element):
+        return bash("tnw v", pprs(o))
+    elif o is None:
+        pass
+    else:
+        try:
+            return bash("tm -d -tout nw 'v'", pickle.dumps(o))
+        except:
+            pass
+
+def v(o):
+    """
+    Splits the terminal, and runs a program on the string representation of the object, depending on its type, such as visidata for a DataFrame.
+
+    :param o: The object to be opened in tmux
+    """
+
+    sys.stdout.write(str(type(o)))
+
+    # python 2 only
+    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
+        return bash("tm -d nw 'vlf'", o.decode("utf-8"))
+
+    #elif isinstance(o, pd.core.series.Series):
+    #    return bash("tm -d nw 'vim -'", pd.Series(o).to_csv(index=False))
+
+    if isinstance(o, pd.core.frame.DataFrame):
+        return bash("tm -d nw 'vlf'", o.to_csv(index=False))
+    elif isinstance(o, set):
+        # For a set of tuples
+        # Say, created like this:
+        # diff = set(zip(df1.CDID, df1.ElementName)) - set(zip(df2.CDID, df2.ElementName))
+        return bash("tm -d nw 'vlf'", pd.DataFrame(dict(o)).to_csv(index=False))
+    elif isinstance(o, tuple):
+        return bash("tm -d nw 'vlf'", pd.DataFrame(list(o)).to_csv(index=False))
+    elif isinstance(o, numpy.ndarray):
+        return bash("tm -d nw 'vlf'", pd.DataFrame(o).to_csv(index=False))
+    elif isinstance(o, set):
+        return bash("tm -d nw 'vlf'", pd.DataFrame(o).to_csv(index=False))
+    elif isinstance(o, list):
+        return bash("tm -d nw 'vlf'", pd.DataFrame(o).to_csv(index=False))
+    elif hasattr(type(o), 'to_csv') and callable(getattr(type(o), 'to_csv')):
+        return bash("tm -d nw 'vlf'", o.to_csv(index=False))
+    elif isinstance(o, dict):
+        bash("dict")
+        return bash("tm -d nw 'vlf'", ppr(o))
+    elif isinstance(o, str):
+        return bash("tm -d nw 'vlf'", o)
+    elif isinstance(o, xml.etree.ElementTree.ElementTree) or isinstance(o, xml.etree.ElementTree.Element):
+        return bash("tm -d nw 'vlf'", pprs(o))
+    elif o is None:
+        pass
+    else:
+        try:
+            return bash("tm -d nw 'vlf'", pickle.dumps(o))
+        except:
+            pass
+
+# This is actually a kinda stupid command -- unless I use it frequently.
+def c(command):
+    """Run a bash command and open the result in fpvd."""
+
+    lf=pd.DataFrame(bash(command)[0].splitlines())
+    r(lf)
+
+def bpy():
+    """Splits the screen, and starts a bpython."""
+
+    bash("tm -d sph -c ~ -n bpython bpython &")[0].decode("utf-8")
+
+def t(o):
+    """Alias for type()"""
+
+    return type(o)
+
+def pwd():
+    """Just runs bash pwd"""
+
+    #  return bash("pwd")[0].rstrip()
+    return bash("pwd")[0].rstrip('\n') # Only strip newlines
+
+
+def ls():
+    """Just runs bash ls"""
+
+    return bash("ls")[0].rstrip('\n').splitlines()
+
+
+def lsautofiles(dir=None):
+    """Just runs bash lsautofiles"""
+
+    if dir:
+        return bash("lsautofiles \"" + dir + "\"")[0].splitlines()
+    else:
+        return bash("lsautofiles")[0].splitlines()
+
+
+def find():
+    """Just runs bash find"""
+
+    return bash("f find-all-no-git")[0].splitlines()
+
+
+def dirinfo():
+    """Just runs bash dirinfo"""
+
+    return bash("u dirinfo")[0]
+
+
+def tv(input=""):
+    """Puts the output into vim"""
+
+    return bash("tv",input)[0]
+
+def tsp():
+    """Just runs bash tmux split pane"""
+
+    return bash("tm -te -d sph")[0]
+
+
+def fish():
+    """Just runs fish in a tmux split pane"""
+
+    return bash("tm -te -d sph fish")[0]
+
+
+def zsh():
+    """Just runs zsh in a tmux split pane"""
+
+    return bash("tm -te -d sph")[0]
+
+
+def sh():
+    """Just runs bash in a tmux split pane"""
+
+    return bash("tm -te -d sph bash")[0]
+
+
+def tcp():
+    """Just runs bash tmux capture"""
+
+    return bash("tm -te -d capture -clean -editor ec")[0]
+
+
+def sl():
+    """Opens locals() in pvd"""
+
+    r(locals())
+
+
+def rl():
+    """Opens locals() in pvd"""
+
+    sl()
+
+
+def map_funcs(obj, func_list):
+    return [func(obj) for func in func_list]
+
+
+def get_stats_dataframe_for_series(o):
+    df=pd.DataFrame(o)
+
+    fl=[pd.Series.std, pd.Series.median, pd.Series.mean, pd.Series.max, pd.Series.min]
+
+    for c in df.columns.tolist():
+        dti=list(zip(list(map(lambda f: f.__name__, fl)), map_funcs(c, fl)))
+        dfi=pd.DataFrame(dti)
+
+    return dfi
+
+# I want this function to return a table of statistics where the column names
+# are things like std, mean, etc. and the row indices/keys are the column names
+# of the original dataframe together with the dataframe's name etc. "df1.CDID",
+# df2.CDID
+#def get_stats_dataframe_for_dataframe(df):
+#    for c in df.columns.tolist():
+#        dti=list(zip(list(map(lambda f: f.__name__, fl)), map_funcs(c, fl)))
+#        dfi=pd.DataFrame(dti)
+#
+#
+#    return dfi
+
+
+def show_stats(o):
+    #if isinstance(o, pd.core.frame.DataFrame):
+    #    return bash("tm -d nw 'fpvd'", o.to_csv(index=False))
+    #else:
+
+    try:
+        df=pd.DataFrame(o)
+    except ValueError:
+        print("Can't be converted to DataFrame")
+        return None
+
+    fl=[pd.Series.std, pd.Series.median, pd.Series.mean, pd.Series.max, pd.Series.min]
+
+    for c in df.columns.tolist():
+        try:
+            dti=list(zip(list(map(lambda f: f.__name__, fl)), map_funcs(df[c], fl)))
+            dfi=pd.DataFrame(dti)
+            print(c)
+            # This isn't very nicely formatted
+            #  print(dfi.to_string(index=False, header=False))
+            ppr(dfi)
+            #  print(dfi.to_csv(index=False, header=False))
+            print("\n")
+        except:
+            pass
+
+    #return bash("tm -d nw 'fpvd'", dfi.to_csv(header=False))
+    #return bash("tm -d nw 'fpvd'", dfi.to_csv(index=False))
+
+#  pp.pprint({})
+
+#  print json.dumps(dict, sort_keys=True, indent=4)
+
+#  result=bash("get-rtm-list.sh")
+#  rtmlist = result[0].split('\n')
+
+
+
+import time
+import threading
+from functools import wraps
+
+def rate_limited(max_per_second, mode='wait', delay_first_call=False):
+    """
+    Decorator that make functions not be called faster than
+
+    set mode to 'kill' to just ignore requests that are faster than the
+    rate.
+
+    set delay_first_call to True to delay the first call as well
+    """
+    lock = threading.Lock()
+    min_interval = 1.0 / float(max_per_second)
+    def decorate(func):
+        last_time_called = [0.0]
+        @wraps(func)
+        def rate_limited_function(*args, **kwargs):
+            def run_func():
+                lock.release()
+                ret = func(*args, **kwargs)
+                last_time_called[0] = time.perf_counter()
+                return ret
+            lock.acquire()
+            elapsed = time.perf_counter() - last_time_called[0]
+            left_to_wait = min_interval - elapsed
+            if delay_first_call:
+                if left_to_wait > 0:
+                    if mode == 'wait':
+                        time.sleep(left_to_wait)
+                        return run_func()
+                    elif mode == 'kill':
+                        lock.release()
+                        return
+                else:
+                    return run_func()
+            else:
+                # Allows the first call to not have to wait
+                if not last_time_called[0] or elapsed > min_interval:
+                    return run_func()
+                elif left_to_wait > 0:
+                    if mode == 'wait':
+                        time.sleep(left_to_wait)
+                        return run_func()
+                    elif mode == 'kill':
+                        lock.release()
+                        return
+        return rate_limited_function
+    return decorate
+
+def make_unicode(input):
+    if type(input) != unicode:
+        input =  input.decode('utf-8')
+        return input
+    else:
+        return input
+
+# enumerate properties (for finding methods)
+def ep(o):
+    """enumerate properties (for finding methods)"""
+    
+    methods = [method_name for method_name in dir(o)
+                  if callable(getattr(o, method_name))]
+
+    return "\n".join(methods)
+    # for name in methods:
+    #     print(name)
+
+def version():
+    print(sys.version_info)
