@@ -58,7 +58,10 @@ def b(command, inputstring="", timeout=0):
     #p.stdin.write(bytearray(inputstring, 'utf-8'))
     p.stdin.write(str(inputstring).encode('utf-8'))
     p.stdin.close()
-    output = p.stdout.read().decode("utf-8")
+    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
+        output = p.stdout.read().decode("utf-8")
+    else:
+        output = p.stdout.read()
     p.wait()
     # print(output)
     #return [output.rstrip(), p.returncode]
@@ -75,7 +78,10 @@ def bsh(command, inputstring="", timeout=0):
     #p.stdin.write(bytearray(inputstring, 'utf-8'))
     p.stdin.write(str(inputstring).encode('utf-8'))
     p.stdin.close()
-    output = p.stdout.read().decode("utf-8")
+    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
+        output = p.stdout.read().decode("utf-8")
+    else:
+        output = p.stdout.read()
     p.wait()
     # print(output)
     #return [output.rstrip(), p.returncode]
@@ -92,7 +98,10 @@ def bash(command, inputstring="", timeout=0):
     #p.stdin.write(bytearray(inputstring, 'utf-8'))
     p.stdin.write(str(inputstring).encode('utf-8'))
     p.stdin.close()
-    output = p.stdout.read().decode("utf-8")
+    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
+        output = p.stdout.read().decode("utf-8")
+    else:
+        output = p.stdout.read()
     p.wait()
     # print(output)
     # I don't want rstrip because my output might have trailing spaces, not just
@@ -239,9 +248,11 @@ def p(o):
     """Save object repr to stdout"""
 
     # sys.stdout.write(o)
-    
+
     print(o,end="")
 
+def xc(o):
+    b("xc -i", p(o))
 
 def tf(s):
     """Creates a temporary file from a string and returns the path"""
@@ -648,7 +659,7 @@ def make_unicode(input):
 # enumerate properties (for finding methods)
 def ep(o):
     """enumerate properties (for finding methods)"""
-    
+
     methods = [method_name for method_name in dir(o)
                   if callable(getattr(o, method_name))]
 
