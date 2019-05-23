@@ -67,7 +67,7 @@ def b(command, inputstring="", timeout=0):
     #return [output.rstrip(), p.returncode]
     # I don't want rstrip because my output might have trailing spaces, not just
     # newlines
-    return [output, p.returncode]
+    return [str(output), p.returncode]
 
 
 def bsh(command, inputstring="", timeout=0):
@@ -87,7 +87,7 @@ def bsh(command, inputstring="", timeout=0):
     #return [output.rstrip(), p.returncode]
     # I don't want rstrip because my output might have trailing spaces, not just
     # newlines
-    return [output, p.returncode]
+    return [str(output), p.returncode]
 
 
 def bash(command, inputstring="", timeout=0):
@@ -106,7 +106,7 @@ def bash(command, inputstring="", timeout=0):
     # print(output)
     # I don't want rstrip because my output might have trailing spaces, not just
     # newlines
-    return [output, p.returncode]
+    return [str(output), p.returncode]
 
 
 def ipy():
