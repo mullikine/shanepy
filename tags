@@ -10,6 +10,7 @@ bash	shanepy.py	/^def bash(command, inputstring="", timeout=0):$/;"	f
 bpy	shanepy.py	/^def bpy():$/;"	f
 bsh	shanepy.py	/^def bsh(command, inputstring="", timeout=0):$/;"	f
 c	shanepy.py	/^def c(command):$/;"	f
+cat	shanepy.py	/^def cat(path):$/;"	f
 d	shanepy.py	/^def d(o):$/;"	f
 decorate	shanepy.py	/^    def decorate(func):$/;"	f	function:rate_limited
 dirinfo	shanepy.py	/^def dirinfo():$/;"	f
@@ -26,6 +27,7 @@ ls	shanepy.py	/^def ls():$/;"	f
 lsautofiles	shanepy.py	/^def lsautofiles(dir=None):$/;"	f
 make_unicode	shanepy.py	/^def make_unicode(input):$/;"	f
 map_funcs	shanepy.py	/^def map_funcs(obj, func_list):$/;"	f
+mnm	shanepy.py	/^def mnm(inputstring=""):$/;"	f
 my_to_csv	shanepy.py	/^def my_to_csv(*args, **kwargs):$/;"	f
 o	shanepy.py	/^def o(fp):$/;"	f
 p	shanepy.py	/^def p(o):$/;"	f
@@ -35,6 +37,7 @@ pprs	shanepy.py	/^def pprs(o):$/;"	f
 pretty_sql	shanepy.py	/^def pretty_sql(sql):$/;"	f
 pwd	shanepy.py	/^def pwd():$/;"	f
 py_modules	setup.py	/^      py_modules=['shanepy'],$/;"	v
+q	shanepy.py	/^def q(inputstring=""):$/;"	f
 r	shanepy.py	/^def r(o):$/;"	f
 rate_limited	shanepy.py	/^def rate_limited(max_per_second, mode='wait', delay_first_call=False):$/;"	f
 rate_limited_function	shanepy.py	/^        def rate_limited_function(*args, **kwargs):$/;"	f	function:rate_limited.decorate
@@ -52,6 +55,7 @@ tcp	shanepy.py	/^def tcp():$/;"	f
 tf	shanepy.py	/^def tf(s):$/;"	f
 tsp	shanepy.py	/^def tsp():$/;"	f
 tv	shanepy.py	/^def tv(input=""):$/;"	f
+umn	shanepy.py	/^def umn(inputstring=""):$/;"	f
 v	shanepy.py	/^def v(o):$/;"	f
 version	setup.py	/^      version='1.1',$/;"	v
 version	shanepy.py	/^def version():$/;"	f

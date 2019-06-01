@@ -82,11 +82,11 @@ def b(command, inputstring="", timeout=0):
 
 def bsh(command, inputstring="", timeout=0):
     """Runs a shell command"""
-    b(command, inputsstring, timeout)
+    return b(command, inputstring, timeout)
 
 def bash(command, inputstring="", timeout=0):
     """Runs a shell command"""
-    b(command, inputsstring, timeout)
+    return b(command, inputstring, timeout)
 
 def q(inputstring=""):
     return b("q", inputstring)[0]
