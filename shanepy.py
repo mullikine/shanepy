@@ -50,63 +50,43 @@ except ImportError:
     from io import StringIO as sio
 
 
+# def b(command, inputstring="", timeout=0):
+#     """Runs a shell command"""
+#     #print(command, file=sys.stderr)
+#     p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
+#                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
+#     #p.stdin.write(bytearray(inputstring, 'utf-8'))
+#     p.stdin.write(str(inputstring).encode('utf-8'))
+#     p.stdin.close()
+#     output = p.stdout.read().decode("utf-8")
+#     # if (sys.version_info < (3, 0)) and isinstance(o, unicode):
+#     #     output = p.stdout.read().decode("utf-8")
+#     # else:
+#     #     output = p.stdout.read()
+#     p.wait()
+#     # print(output)
+#     #return [output.rstrip(), p.returncode]
+#     # I don't want rstrip because my output might have trailing spaces, not just
+#     # newlines
+#     return [str(output), p.returncode]
+
 def b(command, inputstring="", timeout=0):
     """Runs a shell command"""
-    #print(command, file=sys.stderr)
     p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
-    #p.stdin.write(bytearray(inputstring, 'utf-8'))
     p.stdin.write(str(inputstring).encode('utf-8'))
     p.stdin.close()
-    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
-        output = p.stdout.read().decode("utf-8")
-    else:
-        output = p.stdout.read()
+    output = p.stdout.read().decode("utf-8")
     p.wait()
-    # print(output)
-    #return [output.rstrip(), p.returncode]
-    # I don't want rstrip because my output might have trailing spaces, not just
-    # newlines
     return [str(output), p.returncode]
-
 
 def bsh(command, inputstring="", timeout=0):
     """Runs a shell command"""
-    #print(command, file=sys.stderr)
-    p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
-    #p.stdin.write(bytearray(inputstring, 'utf-8'))
-    p.stdin.write(str(inputstring).encode('utf-8'))
-    p.stdin.close()
-    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
-        output = p.stdout.read().decode("utf-8")
-    else:
-        output = p.stdout.read()
-    p.wait()
-    # print(output)
-    #return [output.rstrip(), p.returncode]
-    # I don't want rstrip because my output might have trailing spaces, not just
-    # newlines
-    return [str(output), p.returncode]
-
+    b(command, inputsstring, timeout)
 
 def bash(command, inputstring="", timeout=0):
     """Runs a shell command"""
-    #print(command, file=sys.stderr)
-    p = subprocess.Popen(command, shell=True, executable="/bin/bash", stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
-    #p.stdin.write(bytearray(inputstring, 'utf-8'))
-    p.stdin.write(str(inputstring).encode('utf-8'))
-    p.stdin.close()
-    if (sys.version_info < (3, 0)) and isinstance(o, unicode):
-        output = p.stdout.read().decode("utf-8")
-    else:
-        output = p.stdout.read()
-    p.wait()
-    # print(output)
-    # I don't want rstrip because my output might have trailing spaces, not just
-    # newlines
-    return [str(output), p.returncode]
+    b(command, inputsstring, timeout)
 
 def q(inputstring=""):
     return b("q", inputstring)[0]
