@@ -108,6 +108,17 @@ def bash(command, inputstring="", timeout=0):
     # newlines
     return [str(output), p.returncode]
 
+def q(inputstring=""):
+    return b("q", inputstring)[0]
+
+def umn(inputstring=""):
+    return b("umn", inputstring)[0]
+
+def mnm(inputstring=""):
+    return b("mnm", inputstring)[0]
+
+def cat(path):
+    return b("cat " + q(umn(path)))[0]
 
 def ipy():
     """Splits the screen, and starts an ipython."""
