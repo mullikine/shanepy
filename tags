@@ -4,6 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+INDENT	shanepy.py	/^INDENT=0$/;"	v
 T	shanepy.py	/^def T(list_of_lists):$/;"	f
 b	shanepy.py	/^def b(command, inputstring="", timeout=0):$/;"	f
 bash	shanepy.py	/^def bash(command, inputstring="", timeout=0):$/;"	f
@@ -13,12 +14,19 @@ c	shanepy.py	/^def c(command):$/;"	f
 cat	shanepy.py	/^def cat(path):$/;"	f
 d	shanepy.py	/^def d(o):$/;"	f
 decorate	shanepy.py	/^    def decorate(func):$/;"	f	function:rate_limited
+dedent	shanepy.py	/^def dedent():$/;"	f
+describe	shanepy.py	/^def describe(module):$/;"	f
+describe_builtin	shanepy.py	/^def describe_builtin(obj):$/;"	f
+describe_func	shanepy.py	/^def describe_func(obj, method=False):$/;"	f
+describe_klass	shanepy.py	/^def describe_klass(obj):$/;"	f
 dirinfo	shanepy.py	/^def dirinfo():$/;"	f
 ep	shanepy.py	/^def ep(o):$/;"	f
 find	shanepy.py	/^def find():$/;"	f
 fish	shanepy.py	/^def fish():$/;"	f
+ftf	shanepy.py	/^def ftf(s):$/;"	f
 get_stats_dataframe_for_series	shanepy.py	/^def get_stats_dataframe_for_series(o):$/;"	f
 i	shanepy.py	/^def i():$/;"	f
+indent	shanepy.py	/^def indent():$/;"	f
 ipy	shanepy.py	/^def ipy():$/;"	f
 k	shanepy.py	/^def k(o):$/;"	f
 l	shanepy.py	/^def l(fp):$/;"	f
@@ -52,12 +60,12 @@ source_file	shanepy.py	/^def source_file(fp):$/;"	f
 strip_list	shanepy.py	/^        def strip_list(l):$/;"	f	function:o
 t	shanepy.py	/^def t(o):$/;"	f
 tcp	shanepy.py	/^def tcp():$/;"	f
-tf	shanepy.py	/^def tf(s):$/;"	f
 tsp	shanepy.py	/^def tsp():$/;"	f
 tv	shanepy.py	/^def tv(input=""):$/;"	f
 umn	shanepy.py	/^def umn(inputstring=""):$/;"	f
 v	shanepy.py	/^def v(o):$/;"	f
 version	setup.py	/^      version='1.1',$/;"	v
 version	shanepy.py	/^def version():$/;"	f
+wi	shanepy.py	/^def wi(*args):$/;"	f
 xc	shanepy.py	/^def xc(o):$/;"	f
 zsh	shanepy.py	/^def zsh():$/;"	f
