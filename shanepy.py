@@ -665,20 +665,20 @@ INDENT=0
 
 def wi(*args):
    """ Function to print lines indented according to level """
-   
+
    if INDENT: print(' '*INDENT),
    for arg in args: print(arg),
    print()
 
 def indent():
    """ Increase indentation """
-   
+
    global INDENT
    INDENT += 4
 
 def dedent():
    """ Decrease indentation """
-   
+
    global INDENT
    INDENT -= 4
 
@@ -691,7 +691,7 @@ def describe_builtin(obj):
    # the __doc__ attribute of the function.
    docstr = obj.__doc__
    args = ''
-   
+
    if docstr:
       items = docstr.split('\n')
       if items:
@@ -707,12 +707,12 @@ def describe_builtin(obj):
       wi('\t-Method Arguments: None')
 
    print
-   
+
 def describe_func(obj, method=False):
    """ Describe the function object passed as argument.
    If this is a method object, the second argument will
    be passed as True """
-   
+
    if method:
       wi('+Method: %s' % obj.__name__)
    else:
@@ -721,9 +721,9 @@ def describe_func(obj, method=False):
    try:
        arginfo = inspect.getargspec(obj)
    except TypeError:
-      print 
+      print
       return
-   
+
    args = arginfo[0]
    argsvar = arginfo[1]
 
@@ -756,7 +756,7 @@ def describe_klass(obj):
    indent()
 
    count = 0
-   
+
    for name in obj.__dict__:
        item = getattr(obj, name)
        if inspect.ismethod(item):
@@ -764,20 +764,20 @@ def describe_klass(obj):
 
    if count==0:
       wi('(No members)')
-      
+
    dedent()
-   print 
+   print
 
 def describe(module):
    """ Describe the module object passed as argument
    including its classes and functions """
-   
+
    wi('[Module: %s]\n' % module.__name__)
 
    indent()
 
    count = 0
-   
+
    for name in dir(module):
        obj = getattr(module, name)
        if inspect.isclass(obj):
@@ -789,7 +789,7 @@ def describe(module):
 
    if count==0:
       wi('(No members)')
-      
+
    dedent()
 
 def version():
