@@ -659,6 +659,17 @@ def ep(o):
     #     print(name)
 
 import inspect
+from inspect import ismodule
+
+# enumerate submodules
+def em(o):
+    """enumerate properties (for finding submodules)"""
+
+    modules = [module_name for module_name in dir(o)
+                  if ismodule(getattr(o, module_name))]
+
+    return "\n".join(modules)
+
 import os, sys
 
 INDENT=0
