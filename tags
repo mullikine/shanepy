@@ -15,11 +15,12 @@ cat	shanepy.py	/^def cat(path):$/;"	f
 d	shanepy.py	/^def d(o):$/;"	f
 decorate	shanepy.py	/^    def decorate(func):$/;"	f	function:rate_limited
 dedent	shanepy.py	/^def dedent():$/;"	f
+describe	shanepy.py	/^def describe(obj):$/;"	f
 describe_builtin	shanepy.py	/^def describe_builtin(obj):$/;"	f
 describe_func	shanepy.py	/^def describe_func(obj, method=False):$/;"	f
 describe_klass	shanepy.py	/^def describe_klass(obj):$/;"	f
+describe_module	shanepy.py	/^def describe_module(module):$/;"	f
 dirinfo	shanepy.py	/^def dirinfo():$/;"	f
-dm	shanepy.py	/^def dm(module):$/;"	f
 em	shanepy.py	/^def em(o):$/;"	f
 ep	shanepy.py	/^def ep(o):$/;"	f
 find	shanepy.py	/^def find():$/;"	f

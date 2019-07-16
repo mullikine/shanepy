@@ -779,7 +779,8 @@ def describe_klass(obj):
    dedent()
    print
 
-def dm(module):
+
+def describe_module(module):
    """ Describe the module object passed as argument
    including its classes and functions """
 
@@ -802,6 +803,10 @@ def dm(module):
       wi('(No members)')
 
    dedent()
+
+def describe(obj):
+    switchDict = {module: describe_module, type: describe_klass, function: describe_func, builtin_function_or_method: describe_builtin}
+    switchDict[type(obj).__name__]()
 
 def version():
     print(sys.version_info)
