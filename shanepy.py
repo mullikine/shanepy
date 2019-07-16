@@ -779,7 +779,7 @@ def describe_klass(obj):
    dedent()
    print
 
-def describe(module):
+def dm(module):
    """ Describe the module object passed as argument
    including its classes and functions """
 
