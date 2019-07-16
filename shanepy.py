@@ -203,16 +203,6 @@ def my_to_csv(*args, **kwargs):
     return pd.DataFrame.to_csv(na_rep="", *args, **kwargs)
 
 
-def d(o):
-    """
-    Describe an object
-    """
-
-    if isinstance(o, numpy.ndarray):
-        return scipy.stats.describe(o)
-
-    ppr(o)
-
 def i():
     """Get stdin as a string"""
     import sys
@@ -804,9 +794,35 @@ def describe_module(module):
 
    dedent()
 
-def describe(obj):
-    switchDict = {module: describe_module, type: describe_klass, function: describe_func, builtin_function_or_method: describe_builtin}
-    switchDict[type(obj).__name__]()
+#def describe_object(o):
+#    """
+#    Describe an object
+#    """
+#
+#    if isinstance(o, numpy.ndarray):
+#        return scipy.stats.describe(o)
+#
+#    ppr(o)
+
+def d(obj):
+    """
+    Describe an object
+    """
+
+    print(type(obj))
+
+    switchDict = {
+        "module": describe_module,
+        "type": describe_klass,
+        "function": describe_func,
+        "builtin_function_or_method": describe_builtin,
+        "numpy.ndarray": scipy.stats.describe
+    }
+
+    try:
+        switchDict[type(obj).__name__](obj)
+    except KeyError:
+        ppr(obj)
 
 def version():
     print(sys.version_info)
