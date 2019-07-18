@@ -662,26 +662,26 @@ def em(o):
 
 import os, sys
 
-INDENT=0
+GLOBAL_INDENT=0
 
 def wi(*args):
    """ Function to print lines indented according to level """
 
-   if INDENT: print(' '*INDENT),
+   if GLOBAL_INDENT: print(' '*GLOBAL_INDENT),
    for arg in args: print(arg),
    print()
 
-def indent():
+def global_indent():
    """ Increase indentation """
 
-   global INDENT
-   INDENT += 4
+   global GLOBAL_INDENT
+   GLOBAL_INDENT += 4
 
-def dedent():
+def global_dedent():
    """ Decrease indentation """
 
-   global INDENT
-   INDENT -= 4
+   global GLOBAL_INDENT
+   GLOBAL_INDENT -= 4
 
 def describe_builtin(obj):
    """ Describe a builtin function """
@@ -754,7 +754,7 @@ def describe_klass(obj):
 
    wi('+Class: %s' % obj.__name__)
 
-   indent()
+   global_indent()
 
    count = 0
 
@@ -766,7 +766,7 @@ def describe_klass(obj):
    if count==0:
       wi('(No members)')
 
-   dedent()
+   global_dedent()
    print
 
 
@@ -776,7 +776,7 @@ def describe_module(module):
 
    wi('[Module: %s]\n' % module.__name__)
 
-   indent()
+   global_indent()
 
    count = 0
 
@@ -792,7 +792,7 @@ def describe_module(module):
    if count==0:
       wi('(No members)')
 
-   dedent()
+   global_dedent()
 
 #def describe_object(o):
 #    """
@@ -831,5 +831,12 @@ import shlex
 def py_q(s):
     return shlex.quote(s)
 
-
 import django
+
+def getenv(varname):
+    """
+    gets an environment variable
+    """
+    return os.environ.get(varname)
+
+# getenv("HOME")
