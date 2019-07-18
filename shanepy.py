@@ -826,3 +826,10 @@ def d(obj):
 
 def version():
     print(sys.version_info)
+
+import shlex
+def py_q(s):
+    return shlex.quote(s)
+
+
+import django
