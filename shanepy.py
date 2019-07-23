@@ -804,6 +804,15 @@ def describe_module(module):
 #
 #    ppr(o)
 
+import scipy
+
+def describe_ndarray(a):
+    try:
+        return scipy.stats.describe
+    except:
+        pass
+        return None
+
 def d(obj):
     """
     Describe an object
@@ -816,7 +825,7 @@ def d(obj):
         "type": describe_klass,
         "function": describe_func,
         "builtin_function_or_method": describe_builtin,
-        "numpy.ndarray": scipy.stats.describe
+        "numpy.ndarray": describe_ndarray
     }
 
     try:
