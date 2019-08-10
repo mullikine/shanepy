@@ -13,6 +13,10 @@ import pprint
 import json
 import json as jn
 
+import pydoc
+from pydoc import locate
+# locate("spacy_pytorch_transformers.language.PyTT_Language")
+
 # Use try because I might be importing shanepy into an environment which doesn't
 # have these packages
 try:
@@ -433,7 +437,7 @@ def t(o):
     return type(o)
 
 # Fully qualified type name
-def fullname(o):
+def full_type_name(o):
   # o.__module__ + "." + o.__class__.__qualname__ is an example in
   # this context of H.L. Mencken's "neat, plausible, and wrong."
   # Python makes no guarantees as to whether the __module__ special
@@ -451,7 +455,10 @@ def ts(o):
     """type() string name"""
 
     # return type(o).__name__
-    return fullname(o)
+    return full_type_name(o)
+
+def lt(o):
+    return inspect.getsourcefile(o)
 
 def pwd():
     """Just runs bash pwd"""
