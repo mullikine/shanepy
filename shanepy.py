@@ -457,6 +457,7 @@ def ts(o):
     # return type(o).__name__
     return full_type_name(o)
 
+# Get the path of the thing
 def lt(o):
     return inspect.getsourcefile(o)
 
