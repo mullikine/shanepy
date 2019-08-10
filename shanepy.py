@@ -457,9 +457,15 @@ def ts(o):
     # return type(o).__name__
     return full_type_name(o)
 
-# Get the path of the thing
+# Get the path of the type of the thing
 def lt(o):
-    return inspect.getsourcefile(o)
+    """ Get the path of the type of the thing"""
+    return inspect.getsourcefile(t(t(o)))
+
+# Get the path of the thing -- could be a method
+def lm(o):
+    """Get the path of the thing"""
+    return inspect.getsourcefile(t(o))
 
 def pwd():
     """Just runs bash pwd"""
