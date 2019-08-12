@@ -74,6 +74,12 @@ except ImportError:
 #     # newlines
 #     return [str(output), p.returncode]
 
+import importlib
+
+def reload_shanepy():
+    import shanepy
+    importlib.reload(shanepy)
+
 def b(command, inputstring="", timeout=0):
     """Runs a shell command"""
     p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
@@ -469,9 +475,14 @@ def pdl(s):
 
 
 # Get the path of the thing -- could be a method
-def lm(o):
-    """Get the path of the thing"""
-    return inspect.getsourcefile(o)
+# lm is a bad name:
+# - list-modules?
+# - list-methods of a module?
+# - locate-method?
+# - locate-module?
+# def lm(o):
+#     """Get the path of the thing"""
+#     return inspect.getsourcefile(o)
 
 def pwd():
     """Just runs bash pwd"""
@@ -678,8 +689,8 @@ def make_unicode(input):
     else:
         return input
 
-# enumerate properties (for finding methods)
-def ep(o):
+
+def exhaust_properties(o):
     """enumerate properties (for finding methods)"""
 
     methods = [method_name for method_name in dir(o)
@@ -688,6 +699,17 @@ def ep(o):
     return "\n".join(methods)
     # for name in methods:
     #     print(name)
+
+
+def list_methods(o):
+	return exhaust_properties(o)
+def list_methods_and_classes(o):
+	return exhaust_properties(o)
+def list_children(o):
+	return exhaust_properties(o)
+def ep(o):
+	return exhaust_properties(o)
+
 
 import inspect
 from inspect import ismodule
