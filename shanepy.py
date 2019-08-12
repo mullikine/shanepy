@@ -76,10 +76,6 @@ except ImportError:
 
 import importlib
 
-def reload_shanepy():
-    import shanepy
-    importlib.reload(shanepy)
-
 def b(command, inputstring="", timeout=0):
     """Runs a shell command"""
     p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
@@ -101,6 +97,9 @@ def bash(command, inputstring="", timeout=0):
 def q(inputstring=""):
     return b("q", inputstring)[0]
 
+def ns(inputstring=""):
+    return b("ns", inputstring)[0]
+
 def umn(inputstring=""):
     return b("umn", inputstring)[0]
 
@@ -109,6 +108,18 @@ def mnm(inputstring=""):
 
 def cat(path):
     return b("cat " + q(umn(path)))[0]
+
+
+# reload_shanepy(); from shanepy import *
+def reload_shanepy():
+    print(b("cr /home/shane/var/smulliga/source/git/mullikine/shanepy/shanepy.py")[0])
+
+    import shanepy
+    importlib.reload(shanepy)
+
+    print("You must run this manually: \"from shanepy import *\"")
+    ns("You must run this manually: \"from shanepy import *\"")
+
 
 def ipy():
     """Splits the screen, and starts an ipython."""
@@ -897,24 +908,43 @@ def d(obj):
         ppr(obj)
 
 
+def mygetsourcefile(thing):
+    path = ""
+    ppr(thing)
+
+    try:
+        path = inspect.getsourcefile(thing)
+    except:
+        pass
+
+    if not path:
+        print("source code not available")
+        return None
+    else:
+        return path
+
+
 def pathof(thing):
     """
     Describe a thing
     """
 
-    print(type(thing).__name__)
+    # print(type(thing).__name__)
 
     switchDict = {
         "module": lambda x: x.__file__,
-        "type": lambda x: inspect.getsourcefile(type(x)), # This means it was an object
-        "function": lambda x: inspect.getsourcefile(x),
+        "type": lambda x: mygetsourcefile(x),
+        "function": lambda x: mygetsourcefile(x),
+        "method": lambda x: mygetsourcefile(x),
         "builtin_function_or_method": None
     }
 
     try:
         return switchDict[type(thing).__name__](thing)
-    except KeyError:
-        ppr(thing)
+    except:
+        # It might be an object
+        return mygetsourcefile(type(thing))
+
 
 
 # Get the path of the type of the thing
