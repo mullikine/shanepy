@@ -436,6 +436,11 @@ def t(o):
 
     return type(o)
 
+def env(s):
+    """Alias for os.environ()"""
+
+    return os.environ[s]
+
 # Fully qualified type name
 def full_type_name(o):
   # o.__module__ + "." + o.__class__.__qualname__ is an example in
@@ -457,15 +462,16 @@ def ts(o):
     # return type(o).__name__
     return full_type_name(o)
 
-# Get the path of the type of the thing
-def lt(o):
-    """ Get the path of the type of the thing"""
-    return inspect.getsourcefile(t(t(o)))
+def pdl(s):
+    """get type from string"""
+
+    return pydoc.locate(s)
+
 
 # Get the path of the thing -- could be a method
 def lm(o):
     """Get the path of the thing"""
-    return inspect.getsourcefile(t(o))
+    return inspect.getsourcefile(o)
 
 def pwd():
     """Just runs bash pwd"""
@@ -867,6 +873,41 @@ def d(obj):
         switchDict[type(obj).__name__](obj)
     except KeyError:
         ppr(obj)
+
+
+def pathof(thing):
+    """
+    Describe a thing
+    """
+
+    print(type(thing).__name__)
+
+    switchDict = {
+        "module": lambda x: x.__file__,
+        "type": lambda x: inspect.getsourcefile(type(x)), # This means it was an object
+        "function": lambda x: inspect.getsourcefile(x),
+        "builtin_function_or_method": None
+    }
+
+    try:
+        return switchDict[type(thing).__name__](thing)
+    except KeyError:
+        ppr(thing)
+
+
+# Get the path of the type of the thing
+def lt(th):
+    """ Get the path of the type of the thing"""
+    return pathof(th)
+
+# Get the path of the type of the thing
+def po(th):
+    """ Get the path of the type of the thing"""
+    return pathof(th)
+
+# alias
+def pathoftypeof(obj):
+    return pathof(obj)
 
 def version():
     print(sys.version_info)
