@@ -910,7 +910,6 @@ def d(obj):
 
 def mygetsourcefile(thing):
     path = ""
-    ppr(thing)
 
     try:
         path = inspect.getsourcefile(thing)
@@ -928,6 +927,8 @@ def pathof(thing):
     """
     Describe a thing
     """
+
+    ppr(thing)
 
     # print(type(thing).__name__)
 
