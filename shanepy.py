@@ -539,6 +539,62 @@ def tsp():
 
     return bash("tm -te -d sph")[0]
 
+def cipe(cmd="", ins=""):
+    """vipe but any command"""
+    if not cmd:
+        cmd = "vipe"
+
+    return bash("tm spv " + q(cmd), ins)[0]
+
+def vipe(ins=""):
+    """vipe"""
+
+    # return bash("tm vipe", ins)[0]
+	return spvio("vipe", ins)
+
+# smart
+def spv(cmd="", ins="", has_output=False):
+    """Just runs bash tmux split pane"""
+
+    return bash("tm -S -tout spv " + q(cmd), ins)[0]
+
+# smart
+def sph(cmd="", ins="", has_output=False):
+    """Just runs bash tmux split pane"""
+
+    return bash("tm -S -tout sph " + q(cmd), ins)[0]
+
+def spvi(cmd="", ins=""):
+    """spv. takes stdin. has tty out"""
+
+    return bash("tm -S -tout spv " + q(cmd), ins)[0]
+
+def sphi(cmd="", ins=""):
+    """sph. takes stdin. has tty out"""
+
+    return bash("tm -S -tout sph " + q(cmd), ins)[0]
+
+def spvio(cmd="", ins=""):
+    """spv. takes stdin. returns stdout"""
+
+    return bash("tm spv " + q(cmd) + " | cat", ins)[0]
+
+def sphio(cmd="", ins=""):
+    """sph. takes stdin. returns stdout"""
+
+    return bash("tm sph " + q(cmd) + " | cat", ins)[0]
+
+def spvd(cmd=""):
+    """Just runs bash tmux split pane"""
+
+    bash("tm -te -d spv " + q(cmd))[0]
+    return None
+
+def sphd(cmd=""):
+    """Just runs bash tmux split pane"""
+
+    bash("tm -te -d sph " + q(cmd))[0]
+    return None
 
 def fish():
     """Just runs fish in a tmux split pane"""
@@ -713,13 +769,13 @@ def exhaust_properties(o):
 
 
 def list_methods(o):
-	return exhaust_properties(o)
+    return exhaust_properties(o)
 def list_methods_and_classes(o):
-	return exhaust_properties(o)
+    return exhaust_properties(o)
 def list_children(o):
-	return exhaust_properties(o)
+    return exhaust_properties(o)
 def ep(o):
-	return exhaust_properties(o)
+    return exhaust_properties(o)
 
 
 import inspect
