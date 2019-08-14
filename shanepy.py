@@ -76,9 +76,15 @@ except ImportError:
 
 import importlib
 
-def b(command, inputstring="", timeout=0):
-    """Runs a shell command"""
-    p = subprocess.Popen(command, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
+def xv(s):
+    return os.path.expandvars(s)
+
+def b(c, inputstring="", timeout=0):
+    """Runs a shell c"""
+
+    c = xv(c)
+
+    p = subprocess.Popen(c, shell=True, executable="/bin/sh", stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)
     p.stdin.write(str(inputstring).encode('utf-8'))
     p.stdin.close()
@@ -86,13 +92,13 @@ def b(command, inputstring="", timeout=0):
     p.wait()
     return [str(output), p.returncode]
 
-def bsh(command, inputstring="", timeout=0):
-    """Runs a shell command"""
-    return b(command, inputstring, timeout)
+def bsh(c, inputstring="", timeout=0):
+    """Runs a shell c"""
+    return b(c, inputstring, timeout)
 
-def bash(command, inputstring="", timeout=0):
-    """Runs a shell command"""
-    return b(command, inputstring, timeout)
+def bash(c, inputstring="", timeout=0):
+    """Runs a shell c"""
+    return b(c, inputstring, timeout)
 
 def q(inputstring=""):
     return b("q", inputstring)[0]
@@ -112,7 +118,7 @@ def cat(path):
 
 # reload_shanepy(); from shanepy import *
 def reload_shanepy():
-    print(b("cr /home/shane/var/smulliga/source/git/mullikine/shanepy/shanepy.py")[0])
+    print(b("cr $MYGIT/mullikine/shanepy/shanepy.py")[0])
 
     import shanepy
     importlib.reload(shanepy)
@@ -279,6 +285,8 @@ def o(fp):
 
     :param str fp: The path of the file
     """
+
+    fp = xv(fp)
 
     #  , dtype={'ID': object}
 
@@ -546,12 +554,6 @@ def cipe(cmd="", ins=""):
 
     return bash("tm spv " + q(cmd), ins)[0]
 
-def vipe(ins=""):
-    """vipe"""
-
-    # return bash("tm vipe", ins)[0]
-	return spvio("vipe", ins)
-
 # smart
 def spv(cmd="", ins="", has_output=False):
     """Just runs bash tmux split pane"""
@@ -583,6 +585,12 @@ def sphio(cmd="", ins=""):
     """sph. takes stdin. returns stdout"""
 
     return bash("tm sph " + q(cmd) + " | cat", ins)[0]
+
+def vipe(ins=""):
+    """vipe"""
+
+    # return bash("tm vipe", ins)[0]
+    return spvio("vipe", ins)
 
 def spvd(cmd=""):
     """Just runs bash tmux split pane"""
@@ -1001,7 +1009,6 @@ def pathof(thing):
     except:
         # It might be an object
         return mygetsourcefile(type(thing))
-
 
 
 # Get the path of the type of the thing
