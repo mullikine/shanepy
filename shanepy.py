@@ -784,6 +784,9 @@ def list_children(o):
     return exhaust_properties(o)
 def ep(o):
     return exhaust_properties(o)
+def m(o):
+    """Members"""
+    return exhaust_properties(o)
 
 
 import inspect
