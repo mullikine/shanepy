@@ -1044,4 +1044,32 @@ def getenv(varname):
 # getenv("HOME")
 
 
+
+def sy__get_dep_path(span1, span2):
+    import spacy
+    assert span1.sent == span2.sent, "sent1: {}, span1: {}, sent2: {}, span2: {}".format(span1.sent, span1, span2.sent, span2)
+
+    up = []
+    down = []
+
+    head = span1[0]
+    while head.dep_ != 'ROOT':
+        up.append(head)
+        head = head.head
+    up.append(head)
+
+    head = span2[0]
+    while head.dep_ != 'ROOT':
+        down.append(head)
+        head = head.head
+    down.append(head)
+    down.reverse()
+
+    for n1, t1 in enumerate(up):
+        for n2, t2 in enumerate(down):
+            if t1 == t2:
+                return ["{}::{}".format(u.dep_, 'up') for u in up[1:n1]] + ["{}::{}".format(d.dep_, 'down') for d in down[n2:]]
+
+
+
 from tabulate import tabulate
