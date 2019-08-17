@@ -230,7 +230,7 @@ def my_to_csv(*args, **kwargs):
     return pd.DataFrame.to_csv(na_rep="", *args, **kwargs)
 
 
-def i():
+def catin():
     """Get stdin as a string"""
     import sys
     return sys.stdin.read()
@@ -1073,6 +1073,10 @@ def sy__get_dep_path(span1, span2):
             if t1 == t2:
                 return ["{}::{}".format(u.dep_, 'up') for u in up[1:n1]] + ["{}::{}".format(d.dep_, 'down') for d in down[n2:]]
 
+
+def i(e):
+    "Exhaust an enumberable"
+    return [i for i in e]
 
 
 from tabulate import tabulate
