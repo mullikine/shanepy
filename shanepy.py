@@ -116,6 +116,10 @@ def cat(path):
     return b("cat " + q(umn(path)))[0]
 
 
+def sayhi():
+    print("hi")
+
+
 # reload_shanepy(); from shanepy import *
 def reload_shanepy():
     print(b("cr $MYGIT/mullikine/shanepy/shanepy.py")[0])
