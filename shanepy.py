@@ -120,10 +120,17 @@ def splitlines(s):
     return s.split("\n")
 
 
-def list_imports_here():
-    # return b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\; | tabulate :")[0].split("\n")
-	return print(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\; | tabulate :")[0])
+def tabulate_string(s, delim="\t"):
+    return b("tabulate " + q(delim), s)[0]
 
+
+
+def list_imports_here():
+    return splitlines(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\;")[0])
+
+def list_imports_here_pp():
+	# return print(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\; | tabulate :")[0])
+	return print(tabulate_string(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\;")[0], ":"))
 
 def sayhi():
     print("hi")
