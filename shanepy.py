@@ -116,6 +116,15 @@ def cat(path):
     return b("cat " + q(umn(path)))[0]
 
 
+def splitlines(s):
+    return s.split("\n")
+
+
+def list_imports_here():
+    # return b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\; | tabulate :")[0].split("\n")
+	return print(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\; | tabulate :")[0])
+
+
 def sayhi():
     print("hi")
 
