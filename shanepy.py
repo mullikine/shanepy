@@ -113,7 +113,10 @@ def mnm(inputstring=""):
     return b("mnm", inputstring)[0]
 
 def cat(path):
-    return b("cat " + q(umn(path)))[0]
+    # return b("cat " + q(umn(path)))[0]
+    # This is more reliable as it handles file descriptors
+    # cat can't handle file descriptors because /proc/self/fd/12 has self in it
+    return open(umn(path), 'r').read()
 
 
 def splitlines(s):
@@ -1100,3 +1103,6 @@ def i(e):
 
 
 from tabulate import tabulate
+
+def sleep(s):
+    time.sleep(s)
