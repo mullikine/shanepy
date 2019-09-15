@@ -12,6 +12,7 @@ import subprocess
 import pprint
 import json
 import json as jn
+import re
 
 import pydoc
 from pydoc import locate
@@ -128,12 +129,27 @@ def tabulate_string(s, delim="\t"):
 
 
 
+# joinargs(["hi", "hi yo", "hi\""])                                                                                                                                        │
+def joinargs(args):
+    """Like the cmd script"""
+    commandstring = '';
+
+    MyOut = subprocess.Popen(["cmd"] + args,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT)
+    stdout,stderr = MyOut.communicate()
+    # print(stdout)
+    # print(stderr)
+
+    return stdout.decode("utf-8")
+
+
 def list_imports_here():
     return splitlines(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\;")[0])
 
 def list_imports_here_pp():
-	# return print(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\; | tabulate :")[0])
-	return print(tabulate_string(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\;")[0], ":"))
+    # return print(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\; | tabulate :")[0])
+    return print(tabulate_string(b("find . -name '*.py' -exec grep -HnP '^(class|def) ' {} \\;")[0], ":"))
 
 def sayhi():
     print("hi")
