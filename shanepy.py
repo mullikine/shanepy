@@ -55,6 +55,16 @@ except ImportError:
     from io import StringIO as sio
 
 
+from importlib import import_module
+sys.path.append(os.path.expanduser("~/.ptpython/"))
+ptconfig = import_module("config")
+from ptpython.repl import embed
+
+def myembed(globals, locals):
+    """This embeds ptpython and honors the ptpython config"""
+    os.environ["EDITOR"] = "sp"
+    embed(globals, locals, configure=ptconfig.configure)
+
 # def b(command, inputstring="", timeout=0):
 #     """Runs a shell command"""
 #     #print(command, file=sys.stderr)
