@@ -60,6 +60,7 @@ sys.path.append(os.path.expanduser("~/.ptpython/"))
 ptconfig = import_module("config")
 from ptpython.repl import embed
 
+# https://github.com/prompt-toolkit/ptpython/issues/284
 def myembed(globals, locals):
     """This embeds ptpython and honors the ptpython config"""
     os.environ["EDITOR"] = "sp"
