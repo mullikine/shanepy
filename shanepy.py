@@ -808,11 +808,16 @@ def rate_limited(max_per_second, mode='wait', delay_first_call=False):
     return decorate
 
 def make_unicode(input):
-    if type(input) != unicode:
-        input =  input.decode('utf-8')
+    try:
+        return input.decode('utf-8')
+    except:
         return input
-    else:
-        return input
+
+    # if type(input) != str:
+    #     input =  input.decode('utf-8')
+    #     return input
+    # else:
+    #     return input
 
 
 def exhaust_properties(o):
