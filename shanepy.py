@@ -342,6 +342,12 @@ def o(fp):
 
     import re
 
+    if re.match(r'.*\.conllu', fp) is not None:
+        import conllu
+        sentences = conllu.parse(cat(fp))
+        #  sys.stdout.write(str(type(ret)))
+        return sentences
+
     if re.match(r'.*\.npy', fp) is not None:
         import numpy as np
         try:
