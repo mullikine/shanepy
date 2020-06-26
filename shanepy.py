@@ -14,6 +14,8 @@ import json
 import json as jn
 import re
 
+import jq
+
 import pydoc
 from pydoc import locate
 # locate("spacy_pytorch_transformers.language.PyTT_Language")
@@ -123,6 +125,9 @@ def umn(inputstring=""):
 
 def mnm(inputstring=""):
     return b("mnm", inputstring)[0]
+
+def tvjq(o):
+    tv(jsonpickle.encode(o)) and None
 
 def cat(path):
     # return b("cat " + q(umn(path)))[0]
