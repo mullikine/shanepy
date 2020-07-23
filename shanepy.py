@@ -14,7 +14,7 @@ import json
 import json as jn
 import re
 
-import jq
+import jsonpickle
 
 import pydoc
 from pydoc import locate
@@ -127,7 +127,11 @@ def mnm(inputstring=""):
     return b("mnm", inputstring)[0]
 
 def tvjq(o):
-    tv(jsonpickle.encode(o)) and None
+    tv(b("jq .", jsonpickle.encode(o))[0]) and None
+    # tv(jsonpickle.encode(o)) and None
+
+def j(o):
+    tvjq(o)
 
 def cat(path):
     # return b("cat " + q(umn(path)))[0]
