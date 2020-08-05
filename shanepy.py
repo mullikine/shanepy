@@ -1154,5 +1154,15 @@ from tabulate import tabulate
 def sleep(s):
     time.sleep(s)
 
-def re_groups(pat s):
-    re.match(r"(\d+)\.(\d+)\.(\d+)", "01.01.20.txt").groups()
+def re_groups(pat, s):
+    return re.match(pat, s).groups()
+
+def append_to_file(s, fp):
+    with open(umn(fp), 'a+') as f:
+        f.write(s)
+
+def log_to_file(s, fp):
+    append_to_file(s, fp)
+
+def tee(s, fp):
+    append_to_file(s, fp)
