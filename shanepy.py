@@ -1153,3 +1153,6 @@ from tabulate import tabulate
 
 def sleep(s):
     time.sleep(s)
+
+def re_groups(pat s):
+    re.match(r"(\d+)\.(\d+)\.(\d+)", "01.01.20.txt").groups()
