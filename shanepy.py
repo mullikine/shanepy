@@ -1167,6 +1167,12 @@ def log_to_file(s, fp):
 def tee_a(s, fp):
     append_to_file(s, fp)
 
-def lmt(s, name):
+def lt(s, name):
     """Log multitail"""
-    append_to_file(s, "/home/shane/notes/logs/" + name + ".txt")
+    append_to_file(str(s) + "\n", "/home/shane/notes/logs/" + name + ".txt")
+    return s
+
+def t(s):
+    """Log multitail default"""
+    lt(s, "shanepy")
+    return s
