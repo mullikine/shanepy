@@ -335,7 +335,7 @@ def ftf(s):
 #  return l[:-1] if l[-1] == '\n' else l
 #  return [strip_list(list(line)) for line in o.readlines()]
 
-# lines
+# lines (of a file)
 def lns(fp):
     return [line.rstrip('\n') for line in open(fp)]
 
