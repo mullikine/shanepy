@@ -1169,4 +1169,4 @@ def tee_a(s, fp):
 
 def lmt(s, name):
     """Log multitail"""
-    append_to_file(s, "/home/shane/notes/logs/" name ".txt")
+    append_to_file(s, "/home/shane/notes/logs/" + name + ".txt")
