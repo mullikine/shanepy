@@ -407,7 +407,7 @@ def o(fp):
 
     #  import pandas as pd
     with open(fp, 'rU') as f:
-        def strip_list(l:
+        def strip_list(l):
             return l[:-1] if l[-1] == '\n' else l
 
         return [strip_list(list(line)) for line in f.readlines()]
