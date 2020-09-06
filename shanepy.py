@@ -94,7 +94,11 @@ def xv(s):
     return os.path.expandvars(s)
 
 def b(c, inputstring="", timeout=0):
-    """Runs a shell c"""
+    """Runs a shell c
+This function always has stdin and stdout.
+Don't do anything fancy here with ttys, handling stdin and stdout.
+If I wan't to use tty programs, then use a ttyize/ttyify script.
+"""
 
     c = xv(c)
 
@@ -644,7 +648,7 @@ def spv(cmd="", ins="", has_output=False):
 
     return bash("tm -S -tout spv " + q(cmd), ins)[0]
 
-def sps(cmd="", ins="", has_output=False):
+def sps(cmd="", ins=None, has_output=False):
     """Just runs bash tmux split pane"""
 
     return bash("tm -S -tout sps " + q(cmd), ins)[0]
