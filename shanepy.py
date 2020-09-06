@@ -358,6 +358,12 @@ def o(fp):
         #  sys.stdout.write(str(type(ret)))
         return sentences
 
+    if re.match(r'.*\.h5', fp) is not None:
+        import h5py
+        # /usr/local/lib/python3.6/dist-packages/h5py
+        ret = "hi"
+        pass
+
     if re.match(r'.*\.npy', fp) is not None:
         import numpy as np
         try:
