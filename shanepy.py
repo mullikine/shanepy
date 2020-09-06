@@ -361,7 +361,15 @@ def o(fp):
     if re.match(r'.*\.h5', fp) is not None:
         import h5py
         # /usr/local/lib/python3.6/dist-packages/h5py
-        ret = "hi"
+
+        # import required libraries
+        import h5py as h5
+        import numpy as np
+        import matplotlib.pyplot as plt
+
+        # Read H5 file
+        ret = h5.File("NEON-DS-Imaging-Spectrometer-Data.h5", "r")
+
         return ret
 
     if re.match(r'.*\.npy', fp) is not None:
