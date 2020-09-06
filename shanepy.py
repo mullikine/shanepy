@@ -368,7 +368,7 @@ def o(fp):
         import matplotlib.pyplot as plt
 
         # Read H5 file
-        ret = h5.File("NEON-DS-Imaging-Spectrometer-Data.h5", "r")
+        ret = h5.File(fp, "r")
 
         return ret
 
