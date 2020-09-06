@@ -361,8 +361,8 @@ def o(fp):
     if re.match(r'.*\.h5', fp) is not None:
         # /usr/local/lib/python3.6/dist-packages/h5py
 
-        from show_h5 import print_h5
-        print_h5(fp, section=None, show_attrs=False, show_data=False)
+        # from show_h5 import print_h5
+        # print_h5(fp, section=None, show_attrs=False, show_data=False)
 
         # import required libraries
         import h5py as h5
