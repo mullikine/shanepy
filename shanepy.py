@@ -98,6 +98,7 @@ def b(c, inputstring="", timeout=0):
 This function always has stdin and stdout.
 Don't do anything fancy here with ttys, handling stdin and stdout.
 If I wan't to use tty programs, then use a ttyize/ttyify script.
+echo hi | ttyify vim | cat
 """
 
     c = xv(c)
