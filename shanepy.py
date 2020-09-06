@@ -359,7 +359,6 @@ def o(fp):
         return sentences
 
     if re.match(r'.*\.h5', fp) is not None:
-        import h5py
         # /usr/local/lib/python3.6/dist-packages/h5py
 
         # import required libraries
