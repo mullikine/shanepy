@@ -362,7 +362,7 @@ def o(fp):
         import h5py
         # /usr/local/lib/python3.6/dist-packages/h5py
         ret = "hi"
-        pass
+        return ret
 
     if re.match(r'.*\.npy', fp) is not None:
         import numpy as np
