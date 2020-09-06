@@ -650,7 +650,7 @@ def spv(cmd="", ins="", has_output=False):
     return bash("tm -S -tout spv " + q(cmd), ins)[0]
 
 # spv("ttyify vim")
-def sps(cmd="", ins=None, has_output=False):
+def sps(cmd="", ins="", has_output=False):
     """Just runs bash tmux split pane"""
 
     return bash("tm -S -tout sps " + q(cmd), ins)[0]
