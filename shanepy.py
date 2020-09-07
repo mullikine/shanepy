@@ -349,8 +349,7 @@ def lns(fp):
 def osy(fp):
     nlp = sy.load("en_core_web_sm")
 
-    #  print(sys.argv[1])
-    with open(sys.argv[1], 'r') as f:
+    with open(fp, 'r') as f:
         text = f.read()
 
     return nlp(text)
