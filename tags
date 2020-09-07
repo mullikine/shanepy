@@ -4,5 +4,120 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+GLOBAL_INDENT	shanepy.py	/^GLOBAL_INDENT=0$/;"	v
+T	shanepy.py	/^def T(list_of_lists):$/;"	f
+append_to_file	shanepy.py	/^def append_to_file(s, fp):$/;"	f
+b	shanepy.py	/^def b(c, inputstring="", timeout=0):$/;"	f
+bash	shanepy.py	/^def bash(c, inputstring="", timeout=0):$/;"	f
+bpy	shanepy.py	/^def bpy():$/;"	f
+bsh	shanepy.py	/^def bsh(c, inputstring="", timeout=0):$/;"	f
+c	shanepy.py	/^def c(command):$/;"	f
+cat	shanepy.py	/^def cat(path):$/;"	f
+catin	shanepy.py	/^def catin():$/;"	f
+cipe	shanepy.py	/^def cipe(cmd="", ins=""):$/;"	f
+d	shanepy.py	/^def d(obj):$/;"	f
+decorate	shanepy.py	/^    def decorate(func):$/;"	f	function:rate_limited
+describe_builtin	shanepy.py	/^def describe_builtin(obj):$/;"	f
+describe_func	shanepy.py	/^def describe_func(obj, method=False):$/;"	f
+describe_klass	shanepy.py	/^def describe_klass(obj):$/;"	f
+describe_module	shanepy.py	/^def describe_module(module):$/;"	f
+describe_ndarray	shanepy.py	/^def describe_ndarray(a):$/;"	f
+dirinfo	shanepy.py	/^def dirinfo():$/;"	f
+em	shanepy.py	/^def em(o):$/;"	f
+env	shanepy.py	/^def env(s):$/;"	f
+ep	shanepy.py	/^def ep(o):$/;"	f
+exhaust_properties	shanepy.py	/^def exhaust_properties(o):$/;"	f
+find	shanepy.py	/^def find():$/;"	f
+fish	shanepy.py	/^def fish():$/;"	f
+ftf	shanepy.py	/^def ftf(s):$/;"	f
+full_type_name	shanepy.py	/^def full_type_name(o):$/;"	f
+get_stats_dataframe_for_series	shanepy.py	/^def get_stats_dataframe_for_series(o):$/;"	f
+getenv	shanepy.py	/^def getenv(varname):$/;"	f
+global_dedent	shanepy.py	/^def global_dedent():$/;"	f
+global_indent	shanepy.py	/^def global_indent():$/;"	f
+i	shanepy.py	/^def i(e):$/;"	f
+ipy	shanepy.py	/^def ipy():$/;"	f
+j	shanepy.py	/^def j(o):$/;"	f
+joinargs	shanepy.py	/^def joinargs(args):$/;"	f
+k	shanepy.py	/^def k(o):$/;"	f
+list_children	shanepy.py	/^def list_children(o):$/;"	f
+list_imports_here	shanepy.py	/^def list_imports_here():$/;"	f
+list_imports_here_pp	shanepy.py	/^def list_imports_here_pp():$/;"	f
+list_methods	shanepy.py	/^def list_methods(o):$/;"	f
+list_methods_and_classes	shanepy.py	/^def list_methods_and_classes(o):$/;"	f
+list_of_lists_to_text	shanepy.py	/^def list_of_lists_to_text(arg):$/;"	f
+lns	shanepy.py	/^def lns(fp):$/;"	f
+log_to_file	shanepy.py	/^def log_to_file(s, fp):$/;"	f
+ls	shanepy.py	/^def ls():$/;"	f
+lsautofiles	shanepy.py	/^def lsautofiles(dir=None):$/;"	f
+lt	shanepy.py	/^def lt(s, name):$/;"	f
+lt	shanepy.py	/^def lt(th):$/;"	f
+m	shanepy.py	/^def m(o):$/;"	f
+make_unicode	shanepy.py	/^def make_unicode(input):$/;"	f
+map_funcs	shanepy.py	/^def map_funcs(obj, func_list):$/;"	f
+mnm	shanepy.py	/^def mnm(inputstring=""):$/;"	f
+my_to_csv	shanepy.py	/^def my_to_csv(*args, **kwargs):$/;"	f
+myembed	shanepy.py	/^def myembed(globals, locals):$/;"	f
+mygetsourcefile	shanepy.py	/^def mygetsourcefile(thing):$/;"	f
+ns	shanepy.py	/^def ns(inputstring=""):$/;"	f
+o	shanepy.py	/^def o(fp):$/;"	f
+osy	shanepy.py	/^def osy(fp):$/;"	f
+p	shanepy.py	/^def p(o):$/;"	f
+pathof	shanepy.py	/^def pathof(thing):$/;"	f
+pathoftypeof	shanepy.py	/^def pathoftypeof(obj):$/;"	f
+pdl	shanepy.py	/^def pdl(s):$/;"	f
+po	shanepy.py	/^def po(th):$/;"	f
+pp	shanepy.py	/^pp = pprint.PrettyPrinter(indent=2, width=1000, depth=20)$/;"	v
+ppr	shanepy.py	/^def ppr(o):$/;"	f
+pprs	shanepy.py	/^def pprs(o):$/;"	f
+pretty_sql	shanepy.py	/^def pretty_sql(sql):$/;"	f
+ptconfig	shanepy.py	/^ptconfig = import_module("config")$/;"	v
+pwd	shanepy.py	/^def pwd():$/;"	f
 py_modules	setup.py	/^      py_modules=['shanepy'],$/;"	v
+py_q	shanepy.py	/^def py_q(s):$/;"	f
+q	shanepy.py	/^def q(inputstring=""):$/;"	f
+r	shanepy.py	/^def r(o):$/;"	f
+rate_limited	shanepy.py	/^def rate_limited(max_per_second, mode='wait', delay_first_call=False):$/;"	f
+rate_limited_function	shanepy.py	/^        def rate_limited_function(*args, **kwargs):$/;"	f	function:rate_limited.decorate
+re_groups	shanepy.py	/^def re_groups(pat, s):$/;"	f
+read_csv_smart	shanepy.py	/^def read_csv_smart(*args, **kwargs):$/;"	f
+reload_shanepy	shanepy.py	/^def reload_shanepy():$/;"	f
+rl	shanepy.py	/^def rl():$/;"	f
+run_func	shanepy.py	/^            def run_func():$/;"	f	function:rate_limited.decorate.rate_limited_function
+s	shanepy.py	/^def s(o, fp):$/;"	f
+sayhi	shanepy.py	/^def sayhi():$/;"	f
+sh	shanepy.py	/^def sh():$/;"	f
+show_stats	shanepy.py	/^def show_stats(o):$/;"	f
+sl	shanepy.py	/^def sl():$/;"	f
+sleep	shanepy.py	/^def sleep(s):$/;"	f
+source_file	shanepy.py	/^def source_file(fp):$/;"	f
+sph	shanepy.py	/^def sph(cmd="", ins="", has_output=False):$/;"	f
+sphd	shanepy.py	/^def sphd(cmd=""):$/;"	f
+sphi	shanepy.py	/^def sphi(cmd="", ins=""):$/;"	f
+sphio	shanepy.py	/^def sphio(cmd="", ins=""):$/;"	f
+splitlines	shanepy.py	/^def splitlines(s):$/;"	f
+sps	shanepy.py	/^def sps(cmd="", ins="", has_output=False):$/;"	f
+spv	shanepy.py	/^def spv(cmd="", ins="", has_output=False):$/;"	f
+spvd	shanepy.py	/^def spvd(cmd=""):$/;"	f
+spvi	shanepy.py	/^def spvi(cmd="", ins=""):$/;"	f
+spvio	shanepy.py	/^def spvio(cmd="", ins=""):$/;"	f
+strip_list	shanepy.py	/^        def strip_list(l):$/;"	f	function:o
+sy__get_dep_path	shanepy.py	/^def sy__get_dep_path(span1, span2):$/;"	f
+t	shanepy.py	/^def t(o):$/;"	f
+t	shanepy.py	/^def t(s):$/;"	f
+tabulate_string	shanepy.py	/^def tabulate_string(s, delim="\\t"):$/;"	f
+tcp	shanepy.py	/^def tcp():$/;"	f
+tee_a	shanepy.py	/^def tee_a(s, fp):$/;"	f
+ts	shanepy.py	/^def ts(o):$/;"	f
+tsp	shanepy.py	/^def tsp():$/;"	f
+tv	shanepy.py	/^def tv(input=""):$/;"	f
+tvjq	shanepy.py	/^def tvjq(o):$/;"	f
+umn	shanepy.py	/^def umn(inputstring=""):$/;"	f
+v	shanepy.py	/^def v(o):$/;"	f
 version	setup.py	/^      version='1.1',$/;"	v
+version	shanepy.py	/^def version():$/;"	f
+vipe	shanepy.py	/^def vipe(ins=""):$/;"	f
+wi	shanepy.py	/^def wi(*args):$/;"	f
+xc	shanepy.py	/^def xc(o):$/;"	f
+xv	shanepy.py	/^def xv(s):$/;"	f
+zsh	shanepy.py	/^def zsh():$/;"	f

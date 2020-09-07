@@ -14,7 +14,7 @@ import json
 import json as jn
 import re
 
-import spacy
+import spacy as sy
 
 import jsonpickle
 
@@ -346,8 +346,14 @@ def ftf(s):
 def lns(fp):
     return [line.rstrip('\n') for line in open(fp)]
 
-def sy(fp):
-    
+def osy(fp):
+    nlp = sy.load("en_core_web_sm")
+
+    #  print(sys.argv[1])
+    with open(sys.argv[1], 'r') as f:
+        text = f.read()
+
+    return nlp(text)
 
 def o(fp):
     """
