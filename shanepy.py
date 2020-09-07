@@ -14,6 +14,8 @@ import json
 import json as jn
 import re
 
+import spacy
+
 import jsonpickle
 
 import pydoc
@@ -343,6 +345,9 @@ def ftf(s):
 # lines (of a file)
 def lns(fp):
     return [line.rstrip('\n') for line in open(fp)]
+
+def sy(fp):
+    
 
 def o(fp):
     """
