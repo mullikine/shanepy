@@ -1216,3 +1216,10 @@ def t(s):
     """Log multitail default"""
     lt(s, "shanepy")
     return s
+
+# exhaust(enumerate(set(words)))
+def exhaust(g):
+    return [e for e in g]
+
+def generate(g):
+    return [e for e in g]
