@@ -1223,3 +1223,6 @@ def exhaust(g):
 
 def generate(g):
     return [e for e in g]
+
+def gen(g):
+    return [e for e in g]
