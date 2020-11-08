@@ -429,6 +429,11 @@ def o(fp):
         #  sys.stdout.write(str(type(ret)))
         return ret
 
+    if re.match(r'.*\.pkl', fp) is not None:
+        import pandas as pd
+        ret = pd.read_pickle(fp)
+        return ret
+
     if (re.match(r'.*\.pickle$', fp) is not None or re.match(r'.*\.p$', fp) is not None):
         import pickle
 
