@@ -470,17 +470,17 @@ def r(o):
         # For a set of tuples
         # Say, created like this:
         # diff = set(zip(df1.CDID, df1.ElementName)) - set(zip(df2.CDID, df2.ElementName))
-        return bash("tnw fpvd", pd.DataFrame(dict(o)).to_csv(index=False))
+        return bash("tnw fpvd -csv", pd.DataFrame(dict(o)).to_csv(index=False))
     elif isinstance(o, tuple):
-        return bash("tnw fpvd", pd.DataFrame(list(o)).to_csv(index=False))
+        return bash("tnw fpvd -csv", pd.DataFrame(list(o)).to_csv(index=False))
     elif isinstance(o, numpy.ndarray):
-        return bash("tnw fpvd", pd.DataFrame(o).to_csv(index=False))
+        return bash("tnw fpvd -csv", pd.DataFrame(o).to_csv(index=False))
     elif isinstance(o, set):
-        return bash("tnw fpvd", pd.DataFrame(o).to_csv(index=False))
+        return bash("tnw fpvd -csv", pd.DataFrame(o).to_csv(index=False))
     elif isinstance(o, list):
-        return bash("tnw fpvd", pd.DataFrame(o).to_csv(index=False))
+        return bash("tnw fpvd -csv", pd.DataFrame(o).to_csv(index=False))
     elif hasattr(type(o), 'to_csv') and callable(getattr(type(o), 'to_csv')):
-        return bash("tnw fpvd", o.to_csv(index=False))
+        return bash("tnw fpvd -csv", o.to_csv(index=False))
     elif isinstance(o, dict):
         bash("dict")
         return bash("tnw v", ppr(o))
