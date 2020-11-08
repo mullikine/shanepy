@@ -464,7 +464,7 @@ def r(o):
     #    return bash("tnw 'fpvd'", pd.Series(o).to_csv(index=False))
 
     if isinstance(o, pd.core.frame.DataFrame):
-        return bash("tnw fpvd", o.to_csv(index=False))
+        return bash("nw -E \"tf csv | xa fpvd\"", o.to_csv(index=False))
     elif isinstance(o, set):
         # For a set of tuples
         # Say, created like this:
