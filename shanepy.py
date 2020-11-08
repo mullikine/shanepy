@@ -463,36 +463,36 @@ def r(o):
 
     # python 2 only
     if (sys.version_info < (3, 0)) and isinstance(o, unicode):
-        return bash("tnw 'fpvd -csv'", o.decode("utf-8"))
+        return bash("sps fpvd -csv", o.decode("utf-8"))
 
     #elif isinstance(o, pd.core.series.Series):
     #    return bash("tnw 'fpvd'", pd.Series(o).to_csv(index=False))
 
     if isinstance(o, pd.core.frame.DataFrame):
         # return bash("nw -E \"tf csv | xa fpvd\"", o.to_csv(index=False))
-        return bash("tnw fpvd -csv", o.to_csv(index=False))
+        return bash("sps fpvd -csv", o.to_csv(index=False))
     elif isinstance(o, set):
         # For a set of tuples
         # Say, created like this:
         # diff = set(zip(df1.CDID, df1.ElementName)) - set(zip(df2.CDID, df2.ElementName))
-        return bash("tnw fpvd -csv", pd.DataFrame(dict(o)).to_csv(index=False))
+        return bash("sps fpvd -csv", pd.DataFrame(dict(o)).to_csv(index=False))
     elif isinstance(o, tuple):
-        return bash("tnw fpvd -csv", pd.DataFrame(list(o)).to_csv(index=False))
+        return bash("sps fpvd -csv", pd.DataFrame(list(o)).to_csv(index=False))
     elif isinstance(o, numpy.ndarray):
-        return bash("tnw fpvd -csv", pd.DataFrame(o).to_csv(index=False))
+        return bash("sps fpvd -csv", pd.DataFrame(o).to_csv(index=False))
     elif isinstance(o, set):
-        return bash("tnw fpvd -csv", pd.DataFrame(o).to_csv(index=False))
+        return bash("sps fpvd -csv", pd.DataFrame(o).to_csv(index=False))
     elif isinstance(o, list):
-        return bash("tnw fpvd -csv", pd.DataFrame(o).to_csv(index=False))
+        return bash("sps fpvd -csv", pd.DataFrame(o).to_csv(index=False))
     elif hasattr(type(o), 'to_csv') and callable(getattr(type(o), 'to_csv')):
-        return bash("tnw fpvd -csv", o.to_csv(index=False))
+        return bash("sps fpvd -csv", o.to_csv(index=False))
     elif isinstance(o, dict):
         bash("dict")
-        return bash("tnw v", ppr(o))
+        return bash("sps v", ppr(o))
     elif isinstance(o, str):
-        return bash("tnw v", o)
+        return bash("sps v", o)
     elif isinstance(o, xml.etree.ElementTree.ElementTree) or isinstance(o, xml.etree.ElementTree.Element):
-        return bash("tnw v", pprs(o))
+        return bash("sps v", pprs(o))
     elif o is None:
         pass
     else:
