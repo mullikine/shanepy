@@ -496,10 +496,11 @@ def r(o):
     elif o is None:
         pass
     else:
-        try:
-            return bash("tm -d -tout nw 'v'", pickle.dumps(o))
-        except:
-            return bash("tm -d -tout nw 'v'", str(type(o)))
+        return bash("tm -d -tout nw 'v'", pickle.dumps(o))
+        # try:
+            
+        # except:
+        #     return bash("tm -d -tout nw 'v'", str(type(o)))
 
 def v(o):
     """
