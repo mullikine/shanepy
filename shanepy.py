@@ -500,7 +500,6 @@ def r(o):
             return bash("tm -d -tout nw 'v'", pickle.dumps(o))
         except:
             return bash("tm -d -tout nw 'v'", str(type(o)))
-            pass
 
 def v(o):
     """
