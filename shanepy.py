@@ -458,7 +458,7 @@ def r(o):
 
     # python 2 only
     if (sys.version_info < (3, 0)) and isinstance(o, unicode):
-        return bash("tnw 'fpvd'", o.decode("utf-8"))
+        return bash("tnw 'fpvd -csv'", o.decode("utf-8"))
 
     #elif isinstance(o, pd.core.series.Series):
     #    return bash("tnw 'fpvd'", pd.Series(o).to_csv(index=False))
