@@ -496,7 +496,7 @@ def r(o):
     elif o is None:
         pass
     else:
-        return bash("tm -d -tout nw 'v'", pickle.dumps(o))
+        return bash("tm -d -tout nw 'v'", tv(pickle.dumps(o)))
         # try:
             
         # except:
