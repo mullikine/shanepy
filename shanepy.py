@@ -462,12 +462,12 @@ def o(fp):
 
     # https://stackoverflow.com/q/4980146
     gre = Re()
-    # if gre.match(r'gzip',mimestr):
-    #   # do something with gre.last_match
+
+    if gre.match(r'gzip compressed data',mimestr):
+        # do something with gre.last_match
     # elif gre.match(r'bar',mimestr):
-    #   # do something with gre.last_match
-    # else:
-    #   # do something else
+    #     # do something with gre.last_match
+    #     return mimestr
 
     return mimestr
 
