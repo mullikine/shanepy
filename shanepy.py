@@ -443,14 +443,20 @@ def o(fp):
         ret = pickle.loads(data)
         return ret
 
-    #  import pandas as pd
-    with open(fp, 'rU') as f:
-        def strip_list(l):
-            return l[:-1] if l[-1] == '\n' else l
+    # Just open the file as an unknown binary
+    #  Use python-magic
+    import magic
+    ret = magic.from_file(fp)
+    return ret
 
-        return [strip_list(list(line)) for line in f.readlines()]
+    # #  import pandas as pd
+    # with open(fp, 'rU') as f:
+    #     def strip_list(l):
+    #         return l[:-1] if l[-1] == '\n' else l
 
-    #  ret = pd.DataFrame(matrix)
+    #     return [strip_list(list(line)) for line in f.readlines()]
+
+    # #  ret = pd.DataFrame(matrix)
 
 def r(o):
     """
