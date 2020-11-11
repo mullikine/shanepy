@@ -465,6 +465,10 @@ def o(fp):
 
     if gre.match(r'gzip compressed data',mimestr):
         # do something with gre.last_match
+        import gzip
+        f = gzip.open(fp)
+        return f.read()
+
     # elif gre.match(r'bar',mimestr):
     #     # do something with gre.last_match
     #     return mimestr
