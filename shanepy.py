@@ -458,13 +458,13 @@ def o(fp):
     # Just open the file as an unknown binary
     #  Use python-magic
     import magic
-    ret = magic.from_file(fp)
+    mimestr = magic.from_file(fp)
 
     # https://stackoverflow.com/q/4980146
     gre = Re()
-    if gre.match(r'foo',text):
+    if gre.match(r'foo',mimestr):
       # do something with gre.last_match
-    elif gre.match(r'bar',text):
+    elif gre.match(r'bar',mimestr):
       # do something with gre.last_match
     else:
       # do something else
