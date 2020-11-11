@@ -35,6 +35,18 @@ try:
 except:
     True
 
+# https://stackoverflow.com/q/4980146
+import re
+class Re(object):
+  def __init__(self):
+    self.last_match = None
+  def match(self,pattern,text):
+    self.last_match = re.match(pattern,text)
+    return self.last_match
+  def search(self,pattern,text):
+    self.last_match = re.search(pattern,text)
+    return self.last_match
+
 import pickle
 
 try:
@@ -447,6 +459,12 @@ def o(fp):
     #  Use python-magic
     import magic
     ret = magic.from_file(fp)
+
+
+    switchDict[type(varX)]()
+
+    f = open("myfile", "rb")
+
     return ret
 
     # #  import pandas as pd
