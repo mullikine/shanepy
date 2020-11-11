@@ -462,14 +462,14 @@ def o(fp):
 
     # https://stackoverflow.com/q/4980146
     gre = Re()
-    if gre.match(r'foo',mimestr):
-      # do something with gre.last_match
-    elif gre.match(r'bar',mimestr):
-      # do something with gre.last_match
-    else:
-      # do something else
+    # if gre.match(r'gzip',mimestr):
+    #   # do something with gre.last_match
+    # elif gre.match(r'bar',mimestr):
+    #   # do something with gre.last_match
+    # else:
+    #   # do something else
 
-    return ret
+    return mimestr
 
     # #  import pandas as pd
     # with open(fp, 'rU') as f:
