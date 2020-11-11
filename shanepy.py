@@ -460,10 +460,14 @@ def o(fp):
     import magic
     ret = magic.from_file(fp)
 
-
-    switchDict[type(varX)]()
-
-    f = open("myfile", "rb")
+    # https://stackoverflow.com/q/4980146
+    gre = Re()
+    if gre.match(r'foo',text):
+      # do something with gre.last_match
+    elif gre.match(r'bar',text):
+      # do something with gre.last_match
+    else:
+      # do something else
 
     return ret
 
